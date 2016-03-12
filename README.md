@@ -2,7 +2,7 @@
 
 This fork adds DD branding to Reveal.js
 
-To create your own presentation, go to the `/presentations/` folder, then copy the '/blank-starter/' folder.
+To create your own presentation, go to the `/presentations/` folder, then copy the `/blank-starter/` folder.
 
 Use the [full installation](#installation) steps below, and then navigate to the name of your folder, e.g [http://localhost:8000/presentations/blank-starter/](http://localhost:8000/presentations/blank-starter/)
 
