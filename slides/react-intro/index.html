@@ -24,11 +24,12 @@
 
 		<!-- Printing and PDF exports -->
 		<script>
-			var link = document.createElement( 'link' );
+			var link = document.createElement('link');
 			link.rel = 'stylesheet';
 			link.type = 'text/css';
-			link.href = window.location.search.match( /print-pdf/gi ) ? '../../css/print/pdf.css' : '../../css/print/paper.css';
-			document.getElementsByTagName( 'head' )[0].appendChild( link );
+			var isPdfView = window.location.search.match(/print-pdf/gi);
+			link.href = isPdfView ? '../../css/print/pdf.css' : '../../css/print/paper.css';
+			document.getElementsByTagName('head')[0].appendChild(link);
 		</script>
 
 		<!--[if lt IE 9]>
@@ -68,6 +69,40 @@
 				</section>
 
 				<section>
+					<h2>React in a Nutshell</h2>
+					<ul>
+						<li>Library for Views (Not a framework)</li>
+						<li>Declarative. Just describe your page</li>
+						<li>Breaks pages into components</li>
+						<li>One way data flows</li>
+						<li>(Built by Facebook)</li>
+					</ul>
+				</section>
+
+				<section>
+					<h2>Library for Views</h2>
+					<p>React takes your data, and draws a webpage based on it.</p>
+					<p>Out of the box, it does not dictate how you store data, test your app, handle routing, or anything else.</p>
+				</section>
+
+				<section>
+					<h2>Just Describe your Page</h2>
+					<p>When your data is xyz, how should it look? And when it is abc, how should it look?</p>
+					<p>You don't worry about changing from xyz to abc. React handles that for you. Simple!</p>
+				</section>
+
+				<section>
+					<h2>Break Pages into Components</h2>
+					<img width="800" height="394" data-src="images/components.jpg" class="plain" alt="An example of breaking down Netflix into components." />
+					<p>Each component is responsible for one thing. Components can have child components, to move functionality out into its own.</p>
+				</section>
+
+				<section>
+					<h2>One Way Data Flow</h2>
+					
+				</section>
+
+				<section>
 					<h2>Pretty Code</h2>
 					<pre><code class="hljs" data-trim contenteditable>
 function linkify( selector ) {
@@ -100,11 +135,10 @@ function linkify( selector ) {
 		<script src="../../js/reveal.js"></script>
 
 		<script>
-
 			// Full list of configuration options available at:
 			// https://github.com/hakimel/reveal.js#configuration
 			Reveal.initialize({
-				controls: false,
+  			controls: false,
 				progress: true,
 				history: true,
 				center: true,
