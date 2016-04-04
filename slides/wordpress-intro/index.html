@@ -44,7 +44,7 @@
       <!-- Any section element inside of this container is displayed as a slide -->
       <div class="slides">
         <section>
-          <img width="400" height="358" data-src="images/react-logo.png" class="plain" alt="React.js" />
+          <img width="400" height="400" data-src="images/logo.png" class="plain" alt="WordPress" />
           <h2>What is WordPress?</h2>
           <p>
             <small>by Michael Martin (<a href="https://twitter.com/problogdesign">@problogdesign</a>) from <a href="https://eu.deloittedigital.com/en/home">Deloitte Digital</a></small>
@@ -52,168 +52,130 @@
         </section>
 
         <section>
-          <h2>Traditional Websites</h2>
-          <img width="500" height="315" data-src="images/traditional-website.png" class="plain" alt="Each page generated fresh on a server." />
-          <p>Navigating reloads the entire page every time.</p>
-        </section>
-
-        <section>
-          <h2>Webapps</h2>
-          <img width="500" height="315" data-src="images/webapps.png" class="plain" alt="Each page generated fresh on a server." />
-          <p>App downloaded once. Only data loaded from then on.</p>
-        </section>
-
-        <section>
-          <h2>Plenty of Webapp Options!</h2>
-          <img width="800" height="500" data-src="images/frameworks.png" class="plain" alt="A few of the most popular. Angular, Aurela, Ember, Polymer, Backbone &amp; Ember." />
-        </section>
-
-        <section>
-          <h2>React in a Nutshell</h2>
+          <h2>What does WordPress do?</h2>
           <ul>
-            <li>Breaks pages into components</li>
-            <li>All data kept in Props and State</li>
-            <li>Just describe your page (Declarative)</li>
-            <li>Data flows down from parents to children</li>
+            <li>Publish blog posts</li>
+            <li>Users and comments</li>
+            <li>~150 languages</li>
+            <li>All for free</li>
           </ul>
         </section>
 
         <section>
-          <h2>Break Pages into Components</h2>
-          <img width="800" height="394" data-src="images/components.jpg" class="plain" alt="An example of breaking down Netflix into components." />
-          <p>Each component is responsible for one thing. Components can have child components, to move functionality out into its own.</p>
+          <h2>Who uses it?</h2>
+          <img width="608" height="400" src="images/usage.jpg" class="plain" alt="Many, many customers." />
+          <p>Source: <a href="http://trends.builtwith.com/cms" target="_blank">builtwith.com</a> CMS usage worldwide</p>
+        </section>
+        <section>
+          <img width="800" height="500" src="images/logos.png" class="plain" alt="Big customers." />
         </section>
 
         <section>
-          <pre><code class="javascript">
-class PlayButton extends React.Component {
-  render() {
-    return &lt;button type="button"&gt;Play&lt;/button&gt;;
-  }
-}
+          <p><strong>Demo</strong></p>
+          <p><a href="http://localhost:8888/wordpress/" target="_blank">Write a post</a>.</p>
+        </section>
 
-class VideoPlayer extends React.Component {
-  render() {
-    return (
-      &lt;div className="player"&gt;
-        &lt;img src="images/house-of-cards.jpg" /&gt;
-        &lt;PlayButton /&gt;
-      &lt;/div&gt;
-    );
-  }
+        <section>
+          <h2>How does it work?</h2>
+          <img width="500" height="315" src="images/architecture.png" class="plain" alt="WordPress architecture." />
+        </section>
+
+        <section>
+          <h2>MAMP</h2>
+          <img width="211" height="181" src="images/mamp.png" class="plain" alt="MAMP." />
+          <p>Instant PHP &amp; MySQL setup on your local machine.</p>
+          <p><a href="https://www.mamp.info/en/" target="_blank">Mac</a> &amp; <a href="https://sourceforge.net/projects/wampserver/" target="_blank">Windows</a>.</p>
+        </section>
+
+        <section>
+          <h2>Themes &amp; Plugins</h2>
+        </section>
+
+        <section>
+          <h2>What is a theme?</h2>
+          <p>Decides how your site looks.</p>
+          <p>PHP templates + CSS (+ JavaScript)</p>
+        </section>
+
+        <section>
+          <p><strong>Demo</strong></p>
+          <p><a href="http://localhost:8888/wordpress/wp-admin/themes.php" target="_blank">Install a theme</a>.</p>
+        </section>
+
+        <section>
+          <p>How do themes work?</p>
+        </section>
+
+        <section>
+          <h2>Template hierarchy</h2>
+          <img width="800" height="135" src="images/hierarchy.png" class="plain" alt="Template hierarchy." />
+          <p>Full template hierarchy <a href="http://wphierarchy.com/" target="_blank">here</a>.</p>
+        </section>
+
+        <section>
+          <h2>WordPress functions</h2>
+          <pre><code class="html">
+&lt;div class="logo"&gt;
+  &lt;h1&gt;&lt;?php bloginfo( 'name' ); ?&gt;&lt;/h1&gt;
+  &lt;h2&gt;&lt;?php bloginfo( 'description' ); ?&gt;&lt;/h2&gt;
+&lt;/div&gt;
+          </code></pre>
+          <p>PHP functions you can use anywhere in your theme.</p>
+        </section>
+
+        <section>
+          <h2>What is a plugin?</h2>
+        </section>
+
+        <section>
+          <p><strong>Demo</strong></p>
+          <p><a href="http://localhost:8888/wordpress/wp-admin/plugin-install.php" target="_blank">Install plugins</a>.</p>
+        </section>
+
+        <section>
+          <h2>How do they work?</h2>
+          <p>Hooks and filters.</p>
+          <pre><code class="php">
+function excerpt_length_example( $words ) {
+  return 15;
 }
+add_filter( 'excerpt_length', 'excerpt_length_example' );
           </code></pre>
         </section>
 
         <section>
-          <h2>Props and State</h2>
-          <p><strong>Props</strong> - Data from a parent component.</p>
-          <p><strong>State</strong> - Data owned by the current component.</p>
+          <h2>Ecosystem</h2>
         </section>
 
         <section>
-          <pre><code class="javascript">
-class PlayButton extends React.Component {
-  render() {
-    console.log(this.props.isPlaying);
-  }
-}
-
-class VideoPlayer extends React.Component {
-  constructor() {
-    this.state = { isPlaying: false };
-  }
-
-  render() {
-    ...
-      &lt;PlayButton isPlaying={this.state.isPlaying} /&gt;
-    ...
-  }
-}
-          </code></pre>
-        </section>
-
-        <section>
-          <h2>Just Describe your Page</h2>
-          <p>When your data is xyz, how should it look? And when it is abc, how should it look?</p>
-          <p>You don't worry about changing from xyz to abc. React handles that for you. Simple!</p>
-        </section>
-
-        <section>
-          <pre><code class="javascript">
-class PlayButton extends React.Component {
-  render() {
-    return &lt;button type="button"&gt;
-      {this.props.isPlaying ? 'Pause' : 'Play'}
-    &lt;/button&gt;;
-  }
-}
-          </code></pre>
-        </section>
-
-        <section>
-          <p>But how can clicking "Play" change the "isPlaying" state in VideoPlayer?</p>
-        </section>
-
-        <section>
-          <h2>2-way Data Binding in Angular</h2>
-          <img width="400" height="290" data-src="images/angular-binding.png" class="plain" alt="2 way data binding in Angular." />
-        </section>
-
-        <section>
-          <h2>1-way Data Flow in React</h2>
-          <img width="500" height="315" data-src="images/one-way-data-flow.png" class="plain" alt="1 way data flow in React." />
-          <p>Data flows from parents to children.</p>
-        </section>
-
-        <section>
-          <pre><code class="javascript">
-class VideoPlayer extends React.Component {
-
-  togglePlaying() {
-    this.setState({
-      isPlaying: !this.state.isPlaying
-    });
-  }
-
-  render() {
-    ...
-      &lt;PlayButton
-        onClick={this.togglePlaying.bind(this)}
-        isPlaying={this.state.isPlaying} /&gt;
-    ...
-  }
-}
-          </code></pre>
-        </section>
-
-        <section>
-          <pre><code class="javascript">
-class PlayButton extends React.Component {
-  render() {
-    return &lt;button type="button"
-          onClick={this.props.onClick}&gt;
-          {this.props.isPlaying ? 'Pause' : 'Play'}
-      &lt;/button&gt;;
-  }
-}
-          </code></pre>
-        </section>
-
-        <section>
-          <h2>Getting Started</h2>
-          <p>JSBin is the ideal playground.</p>
-          <p><a href="https://jsbin.com/hesizo/edit?js,output" target="_blank">Here's the app we've built so far.</a></p>
-        </section>
-
-        <section>
-          <h2>What Next?</h2>
-          <p>React only draws components (the V in MVC), you pick the rest. Some ideas and tutorials:</p>
+          <h2>Support</h2>
+          <p>Millions of tutorials on Google.</p>
           <ul>
-            <li><a href="https://css-tricks.com/gulp-for-beginners/" target="_blank">Gulp</a> - A task runner to compile your app.</li>
-            <li><a href="https://facebook.github.io/jest/docs/tutorial-react.html" target="_blank">Jest</a> - Unit testing for React.</li>
-            <li><a href="https://github.com/reactjs/react-router/blob/master/docs/Introduction.md" target="_blank">React Router</a> - Routing (to build single page apps).</li>
-            <li><a href="https://egghead.io/series/getting-started-with-redux" target="_blank">Redux</a> - Manage your data.</li>
+            <li><a href="https://wordpress.org/support/" target="_blank">Official support forum</a></li>
+            <li><a href="http://wordpress.stackexchange.com/" target="_blank">WordPress StackExchange</a></li>
+          </ul>
+        </section>
+
+        <section>
+          <h2>Hosting</h2>
+          <p>Cheap! Under £4 per month at <a href="https://bigwetfish.hosting/web/" target="_blank">Big Wet Fish</a></p>
+          <p>Or go fancy. Automated backups, CDN etc. at <a href="https://wpengine.com/" target="_blank">WPEngine</a></p>
+        </section>
+
+        <section>
+          <h2>Extras</h2>
+          <p>Automated security scans from <a href="https://sucuri.net/" target="_blank">Sucuri</a></p>
+          <p>Backups (and restore down to individual posts) at <a href="https://vaultpress.com/" target="_blank">VaultPress</a></p>
+          <p>Pretty much anything... e.g. <a href="http://techcrunch.com/2016/02/24/wordpress-sites-now-support-googles-amp-to-make-mobile-pages-load-much-faster/" target="_blank">AMP from Google</a></p>
+        </section>
+
+        <section>
+          <h2>What next?</h2>
+          <ul>
+            <li><a href="http://www.wpbeginner.com/" target="_blank">WPBeginnger</a> - Tutorials on everything</li>
+            <li><a href="http://code.tutsplus.com/categories/wordpress" target="_blank">Tuts+ WordPress</a> - In-depth development tutorials</li>
+            <li><a href="https://teamtreehouse.com/tracks/wordpress-development" target="_blank">Treehouse</a> - Video series. 1 week free trial</li>
+            <li><a href="https://digwp.com/book/" target="_blank">DigWP</a> - Book (paid)</li>
           </ul>
         </section>
 
