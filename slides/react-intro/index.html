@@ -143,8 +143,8 @@ class VideoPlayer extends React.Component {
           <pre><code class="javascript">
 class PlayButton extends React.Component {
   render() {
-    return &lt;button type="button" disabled={this.props.isPlaying}&gt;
-      Play
+    return &lt;button type="button"&gt;
+      {this.props.isPlaying ? 'Pause' : 'Play'}
     &lt;/button&gt;;
   }
 }
