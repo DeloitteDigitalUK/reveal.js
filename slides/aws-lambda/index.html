@@ -101,20 +101,14 @@
 				</section>
 
 				<section>
-					<h2>MICHAEL - Hello World</h2>
-					<pre><code class="hljs" data-trim contenteditable>
-function linkify( selector ) {
-  if( supports3DTransforms ) {
+					<h2>Hello World</h2>
+					<pre><code class="hljs wrap" data-trim contenteditable>
+export default (event, context) => {
+  let name = event.body['first_name'];
 
-    var nodes = document.querySelectorAll( selector );
-
-    for( var i = 0, len = nodes.length; i &lt; len; i++ ) {
-      var node = nodes[i];
-
-      if( !node.className ) {
-        node.className += ' roll';
-      }
-    }
+  // must return a promise, a JSON.stringify compatible data, null or nothing.
+  return {
+    message: `Hello ${name}!`
   }
 }
 					</code></pre>
@@ -132,8 +126,9 @@ function linkify( selector ) {
 				</section>
 
 				<section>
-					MICHAEL - API GATEWAY SCREENSHOT
-					<p>Auth, CORS, 3rd parties, no code.</p>
+					<h2>API Gateway</h2>
+					<img width="800" height="447" data-src="images/console-api-gateway.png" class="plain" alt="AWS API Gateway." />
+					<p>Auth, CORS, response statuses, no code.</p>
 				</section>
 
 				<section>
@@ -168,7 +163,13 @@ function linkify( selector ) {
 				</section>
 
 				<section>
-					<p>`console.log` to Cloudwatch MICHAEL - Cloudxxxxxx? Code sample + screenshot?</p>
+					<h2>Cloudwatch Logging</h2>
+					<pre><code class="hljs wrap" data-trim contenteditable>
+export default (event, context) => {
+    console.log("Request received:\n", JSON.stringify(event));
+    console.log("Context received:\n", JSON.stringify(context));
+					</code></pre>
+					<img width="800" height="447" data-src="images/console-cloudwatch.png" class="plain" alt="AWS Cloudwatch." />
 				</section>
 
 				<section>
@@ -177,6 +178,7 @@ function linkify( selector ) {
 
 				<section>
 					<p>Lot's to learn.</p>
+					<img width="1000" height="559" data-src="images/aws-services.png" class="plain" alt="AWS service list." />
 					<small>Cloud Formation, IAM, lots of APIs.</small>
 				</section>
 
@@ -189,8 +191,8 @@ function linkify( selector ) {
 				</section>
 
 				<section>
-					<p>Vendor lock-in.</p>
-					<small>So what?</small>
+					<p>Vendor lock-in (<em>Worth it!</em>)</p>
+					<img width="400" height="300" data-src="images/aws-logo.png" class="plain" alt="AWS." />
 				</section>
 
 				<section>
@@ -199,16 +201,29 @@ function linkify( selector ) {
 
 				<section>
 					<h2>AWS Console</h2>
-					<p>Michael - Screenshot</p>
+					<img width="1000" height="559" data-src="images/console-inline-editor.png" class="plain" alt="AWS Lambda inline editor." />
 				</section>
 
 				<section>
 					<h2>Native code + Gulp</h2>
-					MICHAEL - Sample code from Gulpfile for zip upload
+					<pre><code class="hljs wrap" data-trim contenteditable>
+gulp.task('zip', function() {
+  return gulp.src(['dist/**/*', '!dist/package.json'])
+    .pipe(zip('dist.zip'))
+    .pipe(gulp.dest('./'));
+});
+
+gulp.task('upload', function(callback) {
+  awsLambda.deploy('./dist.zip', require("./lambda-config.js"), callback);
+});
+					</code></pre>
+
+					<p>Full Gulpfile on <a href="https://github.com/ThoughtWorksStudios/node-aws-lambda">Github</a>.</p>
+
 				</section>
 
 				<section>
-					MICHAEL - Serverless logo
+					<img width="1000" height="559" data-src="images/serverless.gif" class="plain" alt="Serverless framework" />
 				</section>
 
 				<section>
@@ -218,6 +233,7 @@ function linkify( selector ) {
 						<li>Cloud Formation templates.</li>
 						<li>Easy deployments.</li>
 						<li>Plugins (ES6, mocha, CORS etc.)</li>
+						<li><a href="http://docs.serverless.com/v0.5.0/docs">Well documented</a>.</li>
 					</ul>
 				</section>
 
