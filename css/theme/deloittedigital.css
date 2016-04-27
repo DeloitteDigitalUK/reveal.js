@@ -162,6 +162,10 @@ body {
   max-height: 400px;
   word-wrap: normal; }
 
+.wrap {
+  white-space: pre-wrap;
+}
+
 .reveal table {
   margin: auto;
   border-collapse: collapse;

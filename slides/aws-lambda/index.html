@@ -1,0 +1,278 @@
+<!doctype html>
+<html lang="en">
+
+	<head>
+		<meta charset="utf-8">
+
+		<title>AWS Lambda</title>
+
+		<meta name="description" content="What it is and how to use it.">
+		<meta name="author" content="Michael Martin">
+
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+
+		<link rel="stylesheet" href="../../css/reveal.css">
+		<link rel="stylesheet" href="../../css/theme/deloittedigital.css" id="theme">
+
+		<!-- Code syntax highlighting -->
+		<link rel="stylesheet" href="../../lib/css/monokai.css">
+
+		<link rel="shortcut icon" type="image/x-icon" href="../../lib/images/favicon.ico" />
+
+		<!-- Printing and PDF exports -->
+		<script>
+			var link = document.createElement( 'link' );
+			link.rel = 'stylesheet';
+			link.type = 'text/css';
+			link.href = window.location.search.match( /print-pdf/gi ) ? '../../css/print/pdf.css' : '../../css/print/paper.css';
+			document.getElementsByTagName( 'head' )[0].appendChild( link );
+		</script>
+
+		<!--[if lt IE 9]>
+		<script src="../../lib/js/html5shiv.js"></script>
+		<![endif]-->
+	</head>
+
+	<body>
+
+		<div class="reveal">
+
+			<!-- Any section element inside of this container is displayed as a slide -->
+			<div class="slides">
+				<section>
+					<img width="301" height="301" data-src="images/lambda-logo.png" class="plain" alt="AWS Lambda" />
+					<h2>AWS Lambda</h2>
+					<h4>Build websites without servers</h4>
+					<p>
+						<small>by Michael Martin / <a href="https://twitter.com/problogdesign">@problogdesign</a></small>
+					</p>
+				</section>
+
+				<section>
+					<ol>
+						<li>What is Lambda?</li>
+						<li>What's great about it?</li>
+						<li>Not so great?</li>
+						<li>How to use?</li>
+					</ol>
+				</section>
+
+				<section>
+					<h2>Normal Webapps</h2>
+					<img width="500" height="315" data-src="images/normal-webapp.png" class="plain" alt="Normal webapps." />
+				</section>
+
+				<section>
+					<h2>Lambda Apps</h2>
+					<img width="500" height="315" data-src="images/lambda-webapp.png" class="plain" alt="Lambda webapps." />
+				</section>
+
+				<section>
+					<h2>So What is a Lambda Function?</h2>
+					<ul>
+						<li>A Nanoservice</li>
+						<li>Triggered by events</li>
+						<li>Stateless</li>
+					</ul>
+				</section>
+
+				<section>
+					<h2>Nanoservices</h2>
+					<p>Each function is its own Lambda instance.</p>
+					<p>Fresh instance for every function call.</p>
+					<p>Node, Python, Java, Binary.</p>
+				</section>
+
+				<section>
+					<h2>Events</h2>
+					<p>An action elsewhere triggers the function</p>
+					<p>e.g. An API call</p>
+					<p>100 concurrent calls = 100 instances. Instantly.</p>
+				</section>
+
+				<section>
+					<h2>Stateless</h2>
+					<p>Once function executes, the instance goes away. No state before or after.</p>
+					<p>Permanent changes go to a database etc.</p>
+					<p>Good design!</p>
+				</section>
+
+				<section>
+					<h2>Hello World</h2>
+					<pre><code class="hljs wrap" data-trim contenteditable>
+export default (event, context) => {
+  let name = event.body['first_name'];
+
+  // must return a promise, a JSON.stringify compatible data, null or nothing.
+  return {
+    message: `Hello ${name}!`
+  }
+}
+					</code></pre>
+				</section>
+
+				<section>
+					<h2>Event Triggers</h2>
+					<ul>
+						<li>s3</li>
+						<li>DynamoDB</li>
+						<li>Kinesis streams</li>
+						<li>Simple Notification Service</li>
+						<li>and...</li>
+					</ul>
+				</section>
+
+				<section>
+					<h2>API Gateway</h2>
+					<img width="800" height="447" data-src="images/console-api-gateway.png" class="plain" alt="AWS API Gateway." />
+					<p>Auth, CORS, response statuses, no code.</p>
+				</section>
+
+				<section>
+					<h2>Example</h2>
+					<img width="500" height="315" data-src="images/full-example.png" class="plain" alt="Full example of a Lambda app." />
+				</section>
+
+				<section>
+					<h2>What's so great<br />about it?</h2>
+				</section>
+
+				<section>
+					<p>No servers. Infinite scale.</p>
+				</section>
+
+				<section>
+					<p>Zero downtime deployments. Code to live app in seconds.</p>
+				</section>
+
+				<section>
+					<p>Microservices, but better.</p>
+				</section>
+
+				<section>
+					<p>Free rollbacks.</p>
+					<img width="272" height="489" data-src="images/lambda-versions.png" class="plain" alt="Lambda version history." />
+					<p><small>(zip files)</small></p>
+				</section>
+
+				<section>
+					<p>$$$ for time used.</p>
+					<small>(e.g. infrastructure management)</small>
+				</section>
+
+				<section>
+					<h2>Cloudwatch Logging</h2>
+					<pre><code class="hljs wrap" data-trim contenteditable>
+export default (event, context) => {
+    console.log("Request received:\n", JSON.stringify(event));
+    console.log("Context received:\n", JSON.stringify(context));
+					</code></pre>
+					<img width="800" height="447" data-src="images/console-cloudwatch.png" class="plain" alt="AWS Cloudwatch." />
+				</section>
+
+				<section>
+					<h2>What's not so great?</h2>
+				</section>
+
+				<section>
+					<p>Lot's to learn.</p>
+					<img width="1000" height="559" data-src="images/aws-services.png" class="plain" alt="AWS service list." />
+					<small>Cloud Formation, IAM, lots of APIs.</small>
+				</section>
+
+				<section>
+					<p>Support and tooling.</p>
+				</section>
+
+				<section>
+					<p>Testing and running locally.</p>
+				</section>
+
+				<section>
+					<p>Vendor lock-in (<em>Worth it!</em>)</p>
+					<img width="400" height="300" data-src="images/aws-logo.png" class="plain" alt="AWS." />
+				</section>
+
+				<section>
+					<h2>How to use it?</h2>
+				</section>
+
+				<section>
+					<h2>AWS Console</h2>
+					<img width="1000" height="559" data-src="images/console-inline-editor.png" class="plain" alt="AWS Lambda inline editor." />
+				</section>
+
+				<section>
+					<h2>Native code + Gulp</h2>
+					<pre><code class="hljs wrap" data-trim contenteditable>
+gulp.task('zip', function() {
+  return gulp.src(['dist/**/*', '!dist/package.json'])
+    .pipe(zip('dist.zip'))
+    .pipe(gulp.dest('./'));
+});
+
+gulp.task('upload', function(callback) {
+  awsLambda.deploy('./dist.zip', require("./lambda-config.js"), callback);
+});
+					</code></pre>
+
+					<p>Full Gulpfile on <a href="https://github.com/ThoughtWorksStudios/node-aws-lambda">Github</a>.</p>
+
+				</section>
+
+				<section>
+					<img width="1000" height="559" data-src="images/serverless.gif" class="plain" alt="Serverless framework" />
+				</section>
+
+				<section>
+					<h2>What is Serverless?</h2>
+					<ul>
+						<li>API Gateway + Lambda</li>
+						<li>Cloud Formation templates.</li>
+						<li>Easy deployments.</li>
+						<li>Plugins (ES6, mocha, CORS etc.)</li>
+						<li><a href="http://docs.serverless.com/v0.5.0/docs">Well documented</a>.</li>
+					</ul>
+				</section>
+
+				<section>
+					<img width="600" height="279" data-src="../../lib/images/dd-logo.png" class="plain" alt="Deloitte Digital" />
+				</section>
+
+			</div>
+
+		</div>
+
+		<script src="../../lib/js/head.min.js"></script>
+		<script src="../../js/reveal.js"></script>
+
+		<script>
+
+			// Full list of configuration options available at:
+			// https://github.com/hakimel/reveal.js#configuration
+			Reveal.initialize({
+				controls: false,
+				progress: true,
+				history: true,
+				center: true,
+
+				transition: 'slide', // none/fade/slide/convex/concave/zoom
+
+				// Optional reveal.js plugins
+				dependencies: [
+					{ src: '../../lib/js/classList.js', condition: function() { return !document.body.classList; } },
+					{ src: '../../plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: '../../plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: '../../plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+					{ src: '../../plugin/zoom-js/zoom.js', async: true },
+					{ src: '../../plugin/notes/notes.js', async: true }
+				]
+			});
+
+		</script>
+
+	</body>
+</html>
