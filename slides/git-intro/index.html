@@ -46,6 +46,14 @@
             li {
                 padding: 15px 0px !important;
             }
+            .code-comment {
+                display: none;
+                position: absolute;
+                top: 28px;
+                right: 10px;
+                color: #aaaaaa !important;
+            }
+
         </style>
 	</head>
 
@@ -203,7 +211,7 @@ $ git checkout -b tech103branch
                     <p>In this case, you are effectively 'staging' these files, before you <strong>commit</strong> (...more later) them to your branch.</p>
                     <pre>
                         <code class="zsh" data-trim contenteditable>
-                            $ git add 'filename'
+                            $ git add index.html
                         </code>
                     </pre>
                 </section>
@@ -212,7 +220,17 @@ $ git checkout -b tech103branch
                     <h2>Why Stage?</h2>
                     <p>Staging allows you to selectively add certain files to your next commit, whilst leaving the rest out of the commit.</p>
                     <p>You may have made changes in several files, but you only want one of those files to be added to the branch, and scrap the rest.</p>
+                </section>
+
+                <section>
+                    <h2>Why Stage?</h2>
                     <p>In this scenario, you can stage the files you want to keep in the <strong>index</strong>, and throw away the rest after committing.</p>
+                    <p>Alternatively, if you're happy to stage all the files you've changed, we can use <strong>git add .</strong></p>
+                    <pre>
+                        <code class="zsh" data-trim contenteditable>
+                            $ git add .
+                        </code>
+                    </pre>
                 </section>
 
                 <section>
@@ -231,7 +249,18 @@ $ git checkout -b tech103branch
                     <h2>Git Commit Messages</h2>
                     <p>Remember our Git History? Here's where it comes from. Every commit should have a descriptive message describing what the change is for.</p>
                     <p>NB: <strong>Miscellaneous Changes</strong> is not a good message!</p>
-                    <p>The <strong>-m</strong> flag when using <strong>git commit</strong> tells Git that the commit message follows, so it won't prompt for it.</p>
+                </section>
+
+                <section>
+                    <h2>Git Commit Log</h2>
+                    <p><img src="images/commitLog.png"/></p>
+                    <p>Good commit messages!</p>
+                </section>
+
+                <section>
+                    <h2>Git Commit Log</h2>
+                    <p><img style="height: 40%; width: 40%;" src="images/badCommit.png"/></p>
+                    <p><strong>-_____-</strong></p>
                 </section>
 
                 <section>
@@ -323,6 +352,45 @@ $ git checkout -b tech103branch
                     <p>Once they have reviewed the changes, they can either merge the request, and your feature (or fix) is now in master, or comment on changes you need to make before they'll merge it!</p>
                     <p>Once it's merged.... move on to the next feature!</p>
                 </section>
+
+                <section>
+                    <h2>Recap</h2>
+                    <pre style="width: 120%; margin-left: -10%; box-shadow: 0px 0px transparent;">
+                        <code id="recap" class="zsh" data-trim contenteditable>
+$ mkdir tech103
+$ cd tech103
+$ git init
+$ git clone https://gitlab.com/Tech103/Wizards/tech103.git
+$ git checkout master
+$ git checkout -b tech103branch
+$ git checkout hotfix_001
+$ git add index.html
+$ git add .
+$ git commit -m 'Adding new index.html and assets'
+$ git pull origin master
+$ git diff tech103branch master
+$ git push origin tech103branch
+
+                        </code>
+
+                        <!-- Code comments HINT: press 'u' to unhide -->
+                        <span id="0" class="code-comment">// Make directory called tech103</span>
+                        <span id="1" class="code-comment">// Change to tech103 directory</span>
+                        <span id="2" class="code-comment">// Initialise bare repository</span>
+                        <span id="3" class="code-comment">// Clone remote repository</span>
+                        <span id="4" class="code-comment">// Checkout branch from master</span>
+                        <span id="5" class="code-comment">// Checkout new branch from head and switch</span>
+                        <span id="6" class="code-comment">// Checkout specific branch</span>
+                        <span id="7" class="code-comment">// Stage index.html pre-commit</span>
+                        <span id="8" class="code-comment">// Stage all files in current directory</span>
+                        <span id="9" class="code-comment">// Commit with message</span>
+                        <span id="10" class="code-comment">// Pull master into current branch</span>
+                        <span id="11" class="code-comment">// View diff between branches</span>
+                        <span id="12" class="code-comment">// Push commits to remote branch</span>
+
+                    </pre>
+                </section>
+
 				<section>
 					<img width="600" height="279" data-src="../../lib/images/dd-logo.png" class="plain" alt="Deloitte Digital" />
 				</section>
@@ -358,6 +426,26 @@ $ git checkout -b tech103branch
 			});
 
 		</script>
+
+        <!-- Custom keyboard handler for Recap section -->
+        <script>
+            var reveal = 0;
+            var totalElements = document.querySelectorAll('.code-comment').length;
+            var offset = Math.floor(document.getElementById("recap").offsetHeight / totalElements) - 2;
+            document.addEventListener('keydown', function(event) {
+
+                console.log(totalElements)
+
+                if(event.keyCode == 85) {
+                    if(reveal < totalElements) {
+                        document.getElementById(reveal.toString()).style.display = 'block';
+                        document.getElementById(reveal.toString()).style.top = offset + 'px';
+                        reveal++;
+                        offset += Math.floor((document.getElementById("recap").offsetHeight / totalElements) - 0.5);
+                    }
+                }
+            });
+        </script>
 
 	</body>
 </html>
