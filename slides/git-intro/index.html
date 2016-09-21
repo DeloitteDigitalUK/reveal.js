@@ -1,0 +1,363 @@
+<!doctype html>
+<html lang="en">
+
+	<head>
+		<meta charset="utf-8">
+
+		<title>$ git – Version control, the right way.</title>
+
+		<meta name="description" content="A framework for easily creating beautiful presentations using HTML">
+		<meta name="author" content="Joe Fynn">
+
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+
+		<link rel="stylesheet" href="../../css/reveal.css">
+		<link rel="stylesheet" href="../../css/theme/deloittedigital.css" id="theme">
+
+		<!-- Code syntax highlighting -->
+		<link rel="stylesheet" href="../../lib/css/monokai.css">
+
+		<link rel="shortcut icon" type="image/x-icon" href="../../lib/images/favicon.ico" />
+
+		<!-- Printing and PDF exports -->
+		<script>
+			var link = document.createElement( 'link' );
+			link.rel = 'stylesheet';
+			link.type = 'text/css';
+			link.href = window.location.search.match( /print-pdf/gi ) ? '../../css/print/pdf.css' : '../../css/print/paper.css';
+			document.getElementsByTagName( 'head' )[0].appendChild( link );
+		</script>
+
+		<!--[if lt IE 9]>
+		<script src="../../lib/js/html5shiv.js"></script>
+		<![endif]-->
+
+        <style>
+            strong {
+                font-family: 'Courier New', sans-serif !important;
+                background-color: black;
+                border-radius: 5px;
+                padding: 0px 8px !important;
+            }
+
+            li {
+                padding: 15px 0px !important;
+            }
+        </style>
+	</head>
+
+	<body>
+
+		<div class="reveal">
+
+			<!-- Any section element inside of this container is displayed as a slide -->
+			<div class="slides">
+				<section>
+					<p><img src="images/hero.svg"/></p>
+					<h3>Introduction to version control with Git</h3>
+					<p>
+						<small>Created by <a href="#">Joe Flynn</a> / <a href="#">@prettyflyit</a></small>
+					</p>
+				</section>
+
+                <!-- Introduction to version control -->
+				<section>
+					<h2>What is version control?</h2>
+					<p><em>"the management of changes to documents, computer programs, large web sites, and other collections of information"</em></p>
+					<p>But why?</p>
+				</section>
+
+                <section>
+                    <h2>Why version control</h2>
+                    <p>Many developers, one codebase. One mistake, and the build is (possibly irrevocably) broken.</p>
+                    <p>Version control ensures this can't happen, by offering a back-up plan for failure, whilst allowing several developers to work on separate components independently without fear of conflict.</p>
+                </section>
+
+                <section>
+                    <h2>Why version control</h2>
+                    <p>One developer may be developing a new feature, while another is fixing an unrelated bug.</p>
+                    <p>Both developers may need to add or change code in the same files, in several parts of the file tree.</p>
+                    <p>Without proper version control, this would be completely unmanageable.</p>
+                </section>
+
+                <section>
+                    <h2>Enter, Git</h2>
+                    <p><img src="images/vcTrends.png"/></p>
+                    <p>Git is the de-facto standard for version control in a multi-user development project, offering security, flexibility, and most importantly, performance.</p>
+                 </section>
+
+                <section>
+                    <h2>Performance</h2>
+                    <p>The algorithms implemented inside Git take advantage of deep knowledge about common attributes of real source code file trees, how they are usually modified over time and what the access patterns are.</p>
+                </section>
+
+                <section>
+                    <h2>Security</h2>
+                    <p>The content of the files, as well as the true relationships between them, in the Git repository are secured with a cryptographically secure hashing algorithm called SHA1.</p>
+                    <p>This protects the code and the change history against both accidental and malicious change and ensures that the history is fully traceable.</p>
+                </section>
+
+                <section>
+                    <h2>Flexibility</h2>
+                    <p>Git is flexible in several respects: in support for various kinds of nonlinear development workflows, in its efficiency in both small and large projects and in its compatibility with many existing systems and protocols.</p>
+                </section>
+
+                <section>
+                    <h2>Repositories</h2>
+                    <p>A repository is a data structure used by Git to manage a set of files or information (usually code, but not always) as it changes over time.</p>
+                </section>
+
+                <section>
+                    <h2>Repositories</h2>
+                    <p>Your local repository consists of three <strong>trees</strong> maintained by Git.</p>
+                    <p>The first one is your <strong>working directory</strong> which holds the actual files.</p>
+                    <p>The second one is the <strong>index</strong> which acts as a staging area, and finally the <strong>head</strong> which points to the last commit you've made.</p>
+                </section>
+
+                <section>
+                    <h2>First, some basics.</h2>
+                    <p>There are many, MANY operations to learn when using Git. Some are extremely powerful, and should only be used by advanced users</p>
+                    <p>We won't be looking at those just yet....</p>
+                </section>
+
+
+                <!-- Git Commands and Correct Usage -->
+                <section>
+                    <h2>Git Init</h2>
+                    <p>Initialising a repository is a fairly simple operation, but the first you should do on any new project.</p>
+                    <p>Create a new directory, navigate to it, and use <strong>git init</strong> to initialise it as an empty repository</p>
+                        <pre>
+                            <code class="sh" data-trim contenteditable>
+$ mkdir tech103
+$ cd tech103
+$ git init
+                            </code>
+                        </pre>
+                </section>
+
+                <section>
+                    <h2>Git Clone</h2>
+                    <p>When joining a team, it's likely that the code already exists on a remote repository, in which case you <strong>clone</strong> the repository to your local machine.</p>
+                    <p>Like before, create a new directory and navigate to it, but this time, use the <strong>git clone</strong> command to create a local copy of it!</p>
+                    <pre>
+                            <code class="sh" data-trim contenteditable>
+$ mkdir tech103
+$ cd tech103
+$ git clone https://gitlab.com/Tech103/Wizards/tech103.git
+                            </code>
+                        </pre>
+
+                </section>
+
+                <section>
+                    <h2>Git Clone</h2>
+                    <p>When cloning a remote repository, you don't just get the current version, you also get a complete history of every change made by every developer who modified it.</p>
+                    <p>Ever.</p>
+                </section>
+
+                <section>
+                    <h2>Git History - Why is it important?</h2>
+                    <ul>
+                        <li>Traceability - If something goes wrong, it's easy to trace down where, how and when.</li>
+                        <li>It helps with documentation - When documenting software, the Git history allows us to form a chronological view of the development process.</li>
+                        <li>All team members can follow progress easily.</li>
+                    </ul>
+                </section>
+
+                <section>
+                    <h2>Branching</h2>
+                    <p>Once you have a copy of the repository on your machine, the next thing to do before working on any features is create a <strong>branch</strong>.</p>
+                    <p>Branches are used to develop features isolated from each other.</p>
+                </section>
+
+                <section>
+                    <h2>Git Checkout from master</h2>
+                    <p>The master branch is the "default" branch when you create a repository. Use other branches for development and merge (more later) them back to the master branch upon completion.</p>
+                    <pre>
+                        <code class="sh" data-trim contenteditable>
+$ git checkout master
+$ git checkout -b tech103branch
+                        </code>
+                    </pre>
+                    <p>This creates a virtual copy of the master branch, but in a separate working tree, so your work is isolated from the master.</p>
+                </section>
+
+                <section>
+                    <h2>Git Checkout specific branch</h2>
+                    <p>Sometimes, you may need to make changes to a branch that hasn't yet been merged into master.</p>
+                    <p>Perhaps a pull request (...more later) needs modified, after you've started a new feature (on a new branch, of course....)</p>
+                    <p>In this situation, you can <strong>checkout</strong> the specific branch to work on</p>
+                    <pre>
+                        <code class="sh" data-trim contenteditable>
+                            $ git checkout hotfix_001
+                        </code>
+                    </pre>
+                </section>
+
+                <section>
+                    <h2>Staging</h2>
+                    <p>As you begin working on new features, you may find yourself adding new files to the repository.</p>
+                    <p>In this case, you are effectively 'staging' these files, before you <strong>commit</strong> (...more later) them to your branch.</p>
+                    <pre>
+                        <code class="zsh" data-trim contenteditable>
+                            $ git add 'filename'
+                        </code>
+                    </pre>
+                </section>
+
+                <section>
+                    <h2>Why Stage?</h2>
+                    <p>Staging allows you to selectively add certain files to your next commit, whilst leaving the rest out of the commit.</p>
+                    <p>You may have made changes in several files, but you only want one of those files to be added to the branch, and scrap the rest.</p>
+                    <p>In this scenario, you can stage the files you want to keep in the <strong>index</strong>, and throw away the rest after committing.</p>
+                </section>
+
+                <section>
+                    <h2>Git Commit</h2>
+                    <p>Once you're happy with the changes in your staging area, you commit them to your branch.</p>
+                    <p>Committing changes is a way of saying <em>"I'm happy with this, this can go to master someday..."</em>.</p>
+                    <p>Rolling back commits is a tedious process, so make sure you're 100% with the changes before committing!</p>
+                    <pre>
+                        <code class="zsh" data-trim contenteditable>
+                            $ git commit -m 'Adding feature to process x in the y system'
+                        </code>
+                    </pre>
+                </section>
+
+                <section>
+                    <h2>Git Commit Messages</h2>
+                    <p>Remember our Git History? Here's where it comes from. Every commit should have a descriptive message describing what the change is for.</p>
+                    <p>NB: <strong>Miscellaneous Changes</strong> is not a good message!</p>
+                    <p>The <strong>-m</strong> flag when using <strong>git commit</strong> tells Git that the commit message follows, so it won't prompt for it.</p>
+                </section>
+
+                <section>
+                    <h2>Multiple Commits</h2>
+                    <p>Once you do a <strong>git commit</strong>, it's important to note that your changes are now at your <strong>head</strong>, but are not yet on the remote branch.</p>
+                    <p>This means you can make more than one commit before finally <strong>pushing</strong> (...more later) your changes to the remote branch.</p>
+                </section>
+
+                <section>
+                    <h2>Multiple Commits</h2>
+                    <p>Multiple commits are no bad thing, in fact, they provide a descriptive history of change... just don't go nuts.</p>
+                    <p><strong>Fixed a spelling mistake</strong> is a pointless commit, unless it's the last one you plan to make before pushing.</p>
+                </section>
+
+                <section>
+                    <h2>Git Pull</h2>
+                    <p>During the interim between getting the master branch, and developing your feature, some changes may have made their way into the master branch which are not yet on your branch.</p>
+                    <p>Before pushing your changes, it's important to ensure your new code still works with whatever changes have been made to the master branch.</p>
+                    <p>This is where <strong>git pull</strong> comes in handy.</p>
+                    <pre>
+                        <code class="zsh" data-trim contenteditable>
+                            $ git pull origin master
+                        </code>
+                    </pre>
+                </section>
+
+                <section>
+                    <h2>Git Pull</h2>
+                    <p>When you pull master into your branch, you are ensuring your local is in tandem with the master branch, so you can run your tests again to make sure it still works.</p>
+                    <p>For the most-part, Git will <strong>auto merge</strong> the changes to master with your branch, whilst preserving your changed code.</p>
+                    <p>However, from time to time, <strong>conflicts</strong> may arise.</p>
+                </section>
+
+                <section>
+                    <h2>Merge Conflicts</h2>
+                    <p>A <strong>merge conflict</strong> can occur if two developers have made conflicting changes to the same piece of code in a file.</p>
+                    <p>These will have to be resolved before you can push your changes, and it's the responsibility of the developer who has made changes which are not yet in master to fix them!</p>
+                    <p>Usually these conflicts can be small things, and can be resolved reasonably easily. Usually.</p>
+                </section>
+
+                <section>
+                    <h2>Git Diff</h2>
+                    <p>When you attempt to push your changes, Git will list those files where merge conflicts exist, but to see a true difference, we use the <strong>git diff</strong> command.</p>
+                    <pre>
+                        <code class="zsh" data-trim contenteditable>
+                            $ git diff tech103branch master
+                        </code>
+                    </pre>
+                    <p>From here, you can see where the conflicts in your branch are, and amend them accordingly.</p>
+                </section>
+
+                <section>
+                    <h2>Git Push</h2>
+                    <p>To push your commits to the remote branch, we use the <strong>git push</strong> command.</p>
+                    <p>This takes all the commits from your local <strong>index</strong> and pushes them to the remote version of the branch on the server.</p>
+                    <pre>
+                        <code class="zsh" data-trim contenteditable>
+                            $ git push origin tech103branch
+                        </code>
+                    </pre>
+                </section>
+
+                <section>
+                    <h2>Pull Requests</h2>
+                    <p>Once you have pushed your changes to the remote version of your branch, and you're happy your feature is finished (including necessary unit and integration tests!), it's time to raise a pull request!</p>
+                </section>
+
+                <section>
+                    <h2>Pull Requests</h2>
+                    <p>A pull request gives the other developers in your team a chance to review your changes, and determine if they can go into the master branch.</p>
+                    <p>Whether you're using GitLab, GitHub, Bitbucket, or any other repository management suite, a pull request largely takes the same format.</p>
+                    <p>Git will note all the differences between your branch, and the current master, and highlight the changes for your team to view.</p>
+                </section>
+
+                <section>
+                    <h2>What's the diff?</h2>
+                    <p><img src="images/gitlabDiff.png"/></p>
+                    <p>This is where Git really becomes useful. The rest of your team can see quickly and easily all your changes, and cast a second (or third, fourth, etc) pair of eyes over them to make sure they work and won't break the build!</p>
+                </section>
+
+                <section>
+                    <h2>Who's Responsible?</h2>
+                    <p><img src="images/pullRequest.png"/></p>
+                    <p>In general, there will be one (or more) people with the ability to merge to master, and are usually senior developers.</p>
+                </section>
+
+                <section>
+                    <h2>And finally...</h2>
+                    <p>Once they have reviewed the changes, they can either merge the request, and your feature (or fix) is now in master, or comment on changes you need to make before they'll merge it!</p>
+                    <p>Once it's merged.... move on to the next feature!</p>
+                </section>
+				<section>
+					<img width="600" height="279" data-src="../../lib/images/dd-logo.png" class="plain" alt="Deloitte Digital" />
+				</section>
+
+			</div>
+
+		</div>
+
+		<script src="../../lib/js/head.min.js"></script>
+		<script src="../../js/reveal.js"></script>
+
+		<script>
+
+			// Full list of configuration options available at:
+			// https://github.com/hakimel/reveal.js#configuration
+			Reveal.initialize({
+				controls: false,
+				progress: true,
+				history: true,
+				center: true,
+
+				transition: 'slide', // none/fade/slide/convex/concave/zoom
+
+				// Optional reveal.js plugins
+				dependencies: [
+					{ src: '../../lib/js/classList.js', condition: function() { return !document.body.classList; } },
+					{ src: '../../plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: '../../plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: '../../plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+					{ src: '../../plugin/zoom-js/zoom.js', async: true },
+					{ src: '../../plugin/notes/notes.js', async: true }
+				]
+			});
+
+		</script>
+
+	</body>
+</html>
