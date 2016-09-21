@@ -54,6 +54,14 @@
                 color: #aaaaaa !important;
             }
 
+            .glossary > li {
+                margin: 0px !important;
+                padding: 0px !important;
+                list-style: none;
+                text-align: left;
+                font-size: 0.8em !important;
+            }
+
         </style>
 	</head>
 
@@ -129,6 +137,22 @@
                     <h2>First, some basics.</h2>
                     <p>There are many, MANY operations to learn when using Git. Some are extremely powerful, and should only be used by advanced users</p>
                     <p>We won't be looking at those just yet....</p>
+                </section>
+
+                <section>
+                    <h2>Quick Reference</h2>
+                    <ul class="glossary">
+                        <li><strong>Repository</strong> - A collection of files and references to changes.</li>
+                        <li><strong>Branch</strong> - An isolated working tree.</li>
+                        <li><strong>Commit</strong> - A change to a file or set of files.</li>
+                        <li><strong>Clone</strong> - Copying a repository from remote to local.</li>
+                        <li><strong>Push</strong> - Move local branch to remote counterpart.</li>
+                        <li><strong>Pull</strong> - Copy remote branch into local branch</li>
+                        <li><strong>Merge</strong> - Combine two branches, preserving changes in both.</li>
+                        <li><strong>Conflict</strong> - Conflicting changes in two branches to be merged.</li>
+                        <li><strong>Checkout</strong> - Switch working tree to another branch.</li>
+                        <li><strong>Diff</strong> - The difference between two branches to be merged.</li>
+                    </ul>
                 </section>
 
 
@@ -225,7 +249,7 @@ $ git checkout -b tech103branch
                 <section>
                     <h2>Why Stage?</h2>
                     <p>In this scenario, you can stage the files you want to keep in the <strong>index</strong>, and throw away the rest after committing.</p>
-                    <p>Alternatively, if you're happy to stage all the files you've changed, we can use <strong>git add .</strong></p>
+                    <p>Alternatively, if you're happy to stage all the files you've changed in a directory, we can use <strong>git add .</strong></p>
                     <pre>
                         <code class="zsh" data-trim contenteditable>
                             $ git add .
