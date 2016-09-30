@@ -1,0 +1,453 @@
+<!doctype html>
+<html lang="en">
+
+	<head>
+		<meta charset="utf-8">
+
+		<title>Webapps with the WordPress REST API</title>
+
+		<meta name="description" content="How to use the WordPress REST API, along with custom post types, taxonomies and endpoints to make a React webapp.">
+		<meta name="author" content="Michael Martin">
+
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+
+		<link rel="stylesheet" href="../../css/reveal.css">
+		<link rel="stylesheet" href="../../css/theme/deloittedigital.css" id="theme">
+
+		<!-- Code syntax highlighting -->
+		<link rel="stylesheet" href="../../lib/css/monokai.css">
+
+		<link rel="shortcut icon" type="image/x-icon" href="../../lib/images/favicon.ico" />
+
+		<!-- Printing and PDF exports -->
+		<script>
+			var link = document.createElement( 'link' );
+			link.rel = 'stylesheet';
+			link.type = 'text/css';
+			link.href = window.location.search.match( /print-pdf/gi ) ? '../../css/print/pdf.css' : '../../css/print/paper.css';
+			document.getElementsByTagName( 'head' )[0].appendChild( link );
+		</script>
+
+		<!--[if lt IE 9]>
+		<script src="../../lib/js/html5shiv.js"></script>
+		<![endif]-->
+	</head>
+
+	<body>
+
+		<div class="reveal">
+
+			<!-- Any section element inside of this container is displayed as a slide -->
+			<div class="slides">
+				<section>
+					<img width="300" height="300" data-src="images/pokeball.png" class="plain" alt="PokePress" />
+					<h3>REST API - How to build a webapp</h3>
+					<p>
+						<small>Created by <a target="_blank" href="http://www.problogdesign.com/">Michael Martin</a> / <a target="_blank" href="https://twitter.com/problogdesign">@problogdesign</a></small>
+					</p>
+				</section>
+
+				<section>
+					<h2>Hi, I'm Michael</h2>
+					<p>
+						Front-end lead at Deloitte Digital Belfast.
+					</p>
+          <p>
+            Former WordPress freelancer at Pro Blog Design.
+          </p>
+          <img width="80" height="80" data-src="images/pbd_avatar_80.png" class="plain" alt="Pro Blog Design avatar" />
+				</section>
+
+        <section>
+          <h2>What are we covering?</h2>
+          <ul>
+            <li>
+              Why the REST API?
+            </li>
+            <li>
+              Getting started
+            </li>
+            <li>
+              New post types &amp; taxonomies
+            </li>
+            <li>
+              Adding attributes
+            </li>
+            <li>
+              Custom endpoints
+            </li>
+          </ul>
+
+          <p>
+            <em>Let's start with the app...</em>
+          </p>
+        </section>
+
+        <section>
+          <img width="674" height="600" data-src="images/pokemon-go.jpg" class="plain" alt="Pokemon GO" />
+        </section>
+
+        <section>
+          <img width="337" height="600" data-src="images/app-demo.jpg" class="plain" alt="App demo" />
+        </section>
+
+        <section>
+          <h3>Two Parts</h3>
+          <ol>
+            <li>
+              React web app - All UI and interactivity.
+            </li>
+            <li>
+              WordPress API - All data, including filters &amp; global capture counts.
+            </li>
+          </ol>
+        </section>
+
+        <section>
+          <h3>Setup the API</h3>
+          <ol>
+            <li>
+              Turn on permalinks.
+            </li>
+            <li>
+              Install the <a target="_blank" href="https://wordpress.org/plugins/rest-api/">REST API</a> plugin.
+            </li>
+            <li>
+              Load <a target="_blank" href="http://vagrantpress.dev/wp-json/wp/v2/posts">http://yoursite.com/wp-json/wp/v2/posts</a>
+            </li>
+          </ol>
+        </section>
+
+        <section>
+          <h2>The Admin Screens</h2>
+        </section>
+
+        <section>
+          <img width="800" height="489" data-src="images/admin-1.jpg" class="plain" alt="Admin UI" />
+        </section>
+
+				<section>
+					<h2>Custom Post Type</h2>
+					<pre><code class="php" data-trim contenteditable>
+function pokepress_post_types() {
+  register_post_type('pokemon', // Adds the 'pokemon' type
+    array(
+      'label' => 'Pokemon',
+      'public' => true,
+      'show_ui' => true,
+      'capability_type' => 'post',
+      'hierarchical' => false,
+      'rewrite' => array('slug' => 'pokemon'),
+      'query_var' => true,
+      'supports' => array('title', 'editor', 'revisions', 'thumbnail'),
+      'taxonomies' => array('pokemon_type'),
+    )
+  );
+}
+add_action('init', 'pokepress_post_types');
+					</code></pre>
+				</section>
+
+        <section>
+					<h2>Custom Taxonomy</h2>
+					<pre><code class="php" data-trim contenteditable>
+function pokepress_post_types() {
+  register_taxonomy('pokemon-type', 'pokemon', // Adds 'type' tags
+    array(
+      'hierarchical' => false,
+      'labels' => array(/* ... */),
+      'show_ui' => true,
+      'show_admin_column' => true,
+      'update_count_callback' => '_update_post_term_count',
+      'query_var' => true,
+      'rewrite' => array('slug' => 'pokemon-type')
+    )
+  );
+
+  register_post_type(/* ... */);
+}
+add_action('init', 'pokepress_post_types');
+					</code></pre>
+				</section>
+
+        <section>
+          <h2>Display a Pokemon</h2>
+          <img width="365" height="258" data-src="images/client-content.jpg" class="plain" alt="App screenshot" />
+        </section>
+
+        <section>
+          <p>
+            <a target="_blank" href="http://vagrantpress.dev/wp-json/wp/v2/pokemon">/wp-json/wp/v2/<strong>pokemon</strong></a>
+          </p>
+
+          <img width="800" height="171" data-src="images/response-1.jpg" class="plain" alt="API Response" />
+
+          <p>
+            😞
+          </p>
+        </section>
+
+        <section>
+          <p>
+            Need to enable our custom types in the API.
+          </p>
+
+          <pre><code class="php" data-trim contenteditable>
+register_post_type('pokemon', array(
+  /* ... */
+  'show_in_rest' => true
+));
+
+register_taxonomy('pokemon-type', 'pokemon', array(
+  /* ... */
+  'show_in_rest' => true
+));
+					</code></pre>
+        </section>
+
+        <section>
+          <p>
+            <a target="_blank" href="http://vagrantpress.dev/wp-json/wp/v2/pokemon">/wp-json/wp/v2/<strong>pokemon</strong></a>
+          </p>
+
+          <img width="800" height="267" data-src="images/response-2.jpg" class="plain" alt="API Response" />
+
+          <p>
+            😄
+          </p>
+        </section>
+
+        <section>
+          <h3>But where's my Pokemon picture?</h3>
+          <img width="800" height="16" data-src="images/response-3.jpg" class="plain" alt="API Response" />
+          <p>
+            😕
+          </p>
+        </section>
+
+        <section>
+          <h3>HAL (Hypertext Application Language)</h3>
+          <blockquote>
+            HAL uses the _links property to indicate links from the current resource to other resources
+            <br /><cite>- <a target="_blank" href="http://v2.wp-api.org/extending/linking/">API Docs</a></cite>
+          </blockquote>
+
+          <img width="800" height="128" data-src="images/response-4.jpg" class="plain" alt="API Response" />
+        </section>
+
+        <section>
+          <p>
+            <a target="_blank" href="http://vagrantpress.dev/wp-json/wp/v2/media/16">/wp-json/wp/v2/<strong>media/16</strong></a>
+          </p>
+
+          <img width="800" height="240" data-src="images/response-image.jpg" class="plain" alt="API Response" />
+
+          <p>
+            🕵
+          </p>
+        </section>
+
+        <section>
+          <p>
+            Install <a target="_blank" href="https://wordpress.org/plugins/better-rest-api-featured-images/">Better REST API Featured Images</a>
+          </p>
+          <img width="800" height="284" data-src="images/response-5.jpg" class="plain" alt="API Response" />
+          <p>
+            Much easier 😅
+          </p>
+        </section>
+
+        <section>
+          <h2>Custom Attributes</h2>
+          <img width="368" height="64" data-src="images/client-attributes.jpg" class="plain" alt="App screenshot" />
+        </section>
+
+        <section>
+          <img width="800" height="237" data-src="images/meta-box.jpg" class="plain" alt="Meta Boxes" />
+        </section>
+
+        <section>
+          <p>
+            Install the <a target="_blank" href="https://wordpress.org/plugins/meta-box/">Meta Box</a> plugin
+          </p>
+          <pre><code class="php" data-trim contenteditable>
+function pokepress_meta_boxes($meta_boxes) {
+  $meta_boxes[] = array(
+    'title' => __( 'Pokemon Attributes', 'textdomain' ),
+    'post_types' => 'pokemon',
+    'fields' => array(
+      array(
+        'id' => 'hp',
+        'name' => __( 'Hitpoints (HP)', 'textdomain' ),
+        'type' => 'text'
+      ),
+      /* Add as many fields as you need. */
+    )
+  );
+  return $meta_boxes;
+}
+add_filter('rwmb_meta_boxes', 'pokepress_meta_boxes');
+        </code></pre>
+        </section>
+
+        <section>
+          <p>register_rest_field()</p>
+          <pre><code class="php" data-trim contenteditable>
+// Register all fields
+function poke_register_rest_fields() {
+  $fields = ['hp', 'attack', 'capture_count']; // Add more here.
+  foreach ($fields as $field) :
+    register_rest_field('pokemon', $field, array(
+      'get_callback' => 'poke_get_custom_field_string',
+      'update_callback' => null,
+      'schema' => null,
+    ));
+  endforeach;
+}
+add_action('rest_api_init', 'poke_register_rest_fields');
+
+// Fetch a simple string
+function poke_get_custom_field_string($object, $field_name, $request) {
+  return get_post_meta($object['id'], $field_name, true);
+}
+          </code></pre>
+        </section>
+
+        <section>
+          <img width="800" height="65" data-src="images/response-6.jpg" class="plain" alt="API Response" />
+          <p>
+            😎
+          </p>
+        </section>
+
+        <section>
+          <h2>Filter by Type</h2>
+          <img width="363" height="447" data-src="images/app-filter.jpg" class="plain" alt="App screenshot" />
+        </section>
+
+        <section>
+          <p>
+            1. Get all <code>Type</code> tags: <a target="_blank" href="http://vagrantpress.dev/wp-json/wp/v2/pokemon-type">/wp-json/wp/v2<strong>/pokemon-type</strong></a>
+          </p>
+          <img width="800" height="98" data-src="images/response-7.jpg" class="plain" alt="API Response" />
+          <p>
+            Save the HAL <code>_links</code> post link
+          </p>
+        </section>
+
+        <section>
+          <p>
+            2. Call this URL to get all Pokemon with the tag
+          </p>
+          <p>
+            <a target="_blank" href="http://vagrantpress.dev/wp-json/wp/v2/pokemon?pokemon-type=2">/wp-json/wp/v2<strong>/pokemon?pokemon-type=2</strong></a>
+          </p>
+          <p>
+            ☺️
+          </p>
+        </section>
+
+        <section>
+          <h2>Catch'em!</h2>
+          <p>
+            (with custom endpoints)
+          </p>
+          <img width="365" height="135" data-src="images/app-capture.jpg" class="plain" alt="App screenshot" />
+        </section>
+
+        <section>
+          <p>register_rest_route()</p>
+          <pre><code class="php" data-trim contenteditable>
+add_action('rest_api_init', function() {
+  register_rest_route('pokepress/v1', '/catch/(?P&lt;id&gt;\d+)', array(
+    'methods' => 'GET',
+    'callback' => 'pokepress_catch_pokemon',
+  ));
+});
+          </code></pre>
+        </section>
+
+        <section>
+          <p>Now do something...</p>
+          <pre><code class="php" data-trim contenteditable>
+// Increment total capture count of this Pokemon
+function pokepress_catch_pokemon($data) {
+  $pokemon_id = intval($data['id']);
+  $capture_count = get_post_meta($pokemon_id, 'capture_count', true);
+
+  $capture_count = empty($capture_count) ? 1 : $capture_count + 1;
+
+  update_post_meta($pokemon_id, 'capture_count', $capture_count);
+  return true;
+}
+          </code></pre>
+        </section>
+
+        <section>
+          <p>
+            Full power of WordPress for whatever you need.
+          </p>
+          <ul>
+            <li>
+              Set up user accounts
+            </li>
+            <li>
+              Take content submissions / votes
+            </li>
+            <li>
+              Send emails
+            </li>
+            <li>
+              Sanitise inputs
+            </li>
+          </ul>
+          <p>
+            etc.
+          </p>
+        </section>
+
+        <section>
+          <h2>Thank you!</h2>
+        </section>
+
+				<section>
+					<img width="600" height="279" data-src="../../lib/images/dd-logo.png" class="plain" alt="Deloitte Digital" />
+				</section>
+
+			</div>
+
+		</div>
+
+		<script src="../../lib/js/head.min.js"></script>
+		<script src="../../js/reveal.js"></script>
+
+		<script>
+
+			// Full list of configuration options available at:
+			// https://github.com/hakimel/reveal.js#configuration
+			Reveal.initialize({
+				controls: false,
+				progress: true,
+				history: true,
+				center: true,
+
+				transition: 'slide', // none/fade/slide/convex/concave/zoom
+
+				// Optional reveal.js plugins
+				dependencies: [
+					{ src: '../../lib/js/classList.js', condition: function() { return !document.body.classList; } },
+					{ src: '../../plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: '../../plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: '../../plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+					{ src: '../../plugin/zoom-js/zoom.js', async: true },
+					{ src: '../../plugin/notes/notes.js', async: true }
+				]
+			});
+
+		</script>
+
+	</body>
+</html>
