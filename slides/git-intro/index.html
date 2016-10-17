@@ -4,7 +4,7 @@
 	<head>
 		<meta charset="utf-8">
 
-		<title>$ git – Version control, the right way.</title>
+		<title>git – Version control, the right way.</title>
 
 		<meta name="description" content="A framework for easily creating beautiful presentations using HTML">
 		<meta name="author" content="Joe Flynn">
@@ -194,9 +194,9 @@
                     <p>Create a new directory, navigate to it, and use <strong>git init</strong> to initialise it as an empty repository</p>
                         <pre>
                             <code class="sh" data-trim contenteditable>
-$ mkdir tech103
-$ cd tech103
-$ git init
+mkdir tech103
+cd tech103
+git init
                             </code>
                         </pre>
                 </section>
@@ -207,9 +207,9 @@ $ git init
                     <p>Like before, create a new directory and navigate to it, but this time, use the <strong>git clone</strong> command to create a local copy of it!</p>
                     <pre>
                             <code class="sh" data-trim contenteditable>
-$ mkdir tech103
-$ cd tech103
-$ git clone https://gitlab.com/Tech103/Wizards/tech103.git
+mkdir tech103
+cd tech103
+git clone https://gitlab.com/Tech103/Wizards/tech103.git
                             </code>
                         </pre>
 
@@ -241,8 +241,8 @@ $ git clone https://gitlab.com/Tech103/Wizards/tech103.git
                     <p>The master branch is the "default" branch when you create a repository. Use other branches for development and merge (more later) them back to the master branch upon completion.</p>
                     <pre>
                         <code class="sh" data-trim contenteditable>
-$ git checkout master
-$ git checkout -b tech103branch
+git checkout master
+git checkout -b tech103branch
                         </code>
                     </pre>
                     <p>This creates a virtual copy of the master branch, but in a separate working tree, so your work is isolated from the master.</p>
@@ -255,7 +255,7 @@ $ git checkout -b tech103branch
                     <p>In this situation, you can <strong>checkout</strong> the specific branch to work on</p>
                     <pre>
                         <code class="sh" data-trim contenteditable>
-                            $ git checkout hotfix_001
+                            git checkout hotfix_001
                         </code>
                     </pre>
                 </section>
@@ -266,7 +266,7 @@ $ git checkout -b tech103branch
                     <p>In this case, you are effectively 'staging' these files, before you <strong>commit</strong> (...more later) them to your branch.</p>
                     <pre>
                         <code class="zsh" data-trim contenteditable>
-                            $ git add index.html
+                            git add index.html
                         </code>
                     </pre>
                 </section>
@@ -283,7 +283,7 @@ $ git checkout -b tech103branch
                     <p>Alternatively, if you're happy to stage all the files you've changed in a directory, we can use <strong>git add .</strong></p>
                     <pre>
                         <code class="zsh" data-trim contenteditable>
-                            $ git add .
+                            git add .
                         </code>
                     </pre>
                 </section>
@@ -295,7 +295,7 @@ $ git checkout -b tech103branch
                     <p>Rolling back commits is a tedious process, so make sure you're 100% with the changes before committing!</p>
                     <pre>
                         <code class="zsh" data-trim contenteditable>
-                            $ git commit -m 'Adding feature to process x in the y system'
+                            git commit -m 'Adding feature to process x in the y system'
                         </code>
                     </pre>
                 </section>
@@ -337,7 +337,7 @@ $ git checkout -b tech103branch
                     <p>This is where <strong>git pull</strong> comes in handy.</p>
                     <pre>
                         <code class="zsh" data-trim contenteditable>
-                            $ git pull origin master
+                            git pull origin master
                         </code>
                     </pre>
                 </section>
@@ -361,7 +361,7 @@ $ git checkout -b tech103branch
                     <p>When you attempt to push your changes, Git will list those files where merge conflicts exist, but to see a true difference, we use the <strong>git diff</strong> command.</p>
                     <pre>
                         <code class="zsh" data-trim contenteditable>
-                            $ git diff tech103branch master
+                            git diff tech103branch master
                         </code>
                     </pre>
                     <p>From here, you can see where the conflicts in your branch are, and amend them accordingly.</p>
@@ -373,7 +373,7 @@ $ git checkout -b tech103branch
                     <p>This takes all the commits from your local <strong>index</strong> and pushes them to the remote version of the branch on the server.</p>
                     <pre>
                         <code class="zsh" data-trim contenteditable>
-                            $ git push origin tech103branch
+                            git push origin tech103branch
                         </code>
                     </pre>
                 </section>
@@ -414,67 +414,67 @@ $ git checkout -b tech103branch
                         <div id="pseudo-code">
 
                             <div class="recap-block">
-                                <div class="pseudo">$ mkdir tech103</div>
+                                <div class="pseudo">mkdir tech103</div>
                                 <div id="0" class="code-comment">// Make directory called tech103</div>
                             </div>
 
                             <div class="recap-block">
-                                <div class="pseudo">$ cd tech103</div>
+                                <div class="pseudo">cd tech103</div>
                                 <div id="1" class="code-comment">// Change to tech103 directory</div>
                             </div>
 
                             <div class="recap-block">
-                                <div class="pseudo">$ git <em>init</em></div>
+                                <div class="pseudo">git <em>init</em></div>
                                 <div id="2" class="code-comment">// Initialise bare repository</div><br>
                             </div>
 
                             <div class="recap-block">
-                                <div class="pseudo">$ git <em>clone</em> https://gitlab.com/Tech103/Wizards/tech103.git</div>
+                                <div class="pseudo">git <em>clone</em> https://gitlab.com/Tech103/Wizards/tech103.git</div>
                                 <div id="3" class="code-comment">// Clone remote repository</div><br>
                             </div>
 
                             <div class="recap-block">
-                                <div class="pseudo">$ git <em>checkout</em> master</div>
+                                <div class="pseudo">git <em>checkout</em> master</div>
                                 <div id="4" class="code-comment">// Checkout branch from master</div><br>
                             </div>
 
                             <div class="recap-block">
-                                <div class="pseudo">$ git <em>checkout</em> -b tech103branch</div>
+                                <div class="pseudo">git <em>checkout</em> -b tech103branch</div>
                                 <div id="5" class="code-comment">// Checkout new branch from head and switch</div><br>
                             </div>
 
                             <div class="recap-block">
-                                <div class="pseudo">$ git <em>checkout</em> hotfix_001</div>
+                                <div class="pseudo">git <em>checkout</em> hotfix_001</div>
                                 <div id="6" class="code-comment">// Checkout specific branch</div><br>
                             </div>
 
                             <div class="recap-block">
-                                <div class="pseudo">$ git <em>add</em> index.html</div>
+                                <div class="pseudo">git <em>add</em> index.html</div>
                                 <div id="7" class="code-comment">// Stage index.html pre-commit</div><br>
                             </div>
 
                             <div class="recap-block">
-                                <div class="pseudo">$ git <em>add</em> .</div>
+                                <div class="pseudo">git <em>add</em> .</div>
                                 <div id="8" class="code-comment">// Stage all files in current directory</div><br>
                             </div>
 
                             <div class="recap-block">
-                                <div class="pseudo">$ git <em>commit</em> <strong>-m</strong> 'Adding new index.html and assets'</div>
+                                <div class="pseudo">git <em>commit</em> <strong>-m</strong> 'Adding new index.html and assets'</div>
                                 <div id="9" class="code-comment">// Commit with message</div><br>
                             </div>
 
                             <div class="recap-block">
-                                <div class="pseudo">$ git <em>pull</em> origin master</div>
+                                <div class="pseudo">git <em>pull</em> origin master</div>
                                 <div id="10" class="code-comment">// Pull master into current branch</div><br>
                             </div>
 
                             <div class="recap-block">
-                                <div class="pseudo">$ git <em>diff</em> tech103branch master</div>
+                                <div class="pseudo">git <em>diff</em> tech103branch master</div>
                                 <div id="11" class="code-comment">// View diff between branches</div><br>
                             </div>
 
                             <div class="recap-block">
-                                <div class="pseudo">$ git <em>push</em> origin tech103branch</div>
+                                <div class="pseudo">git <em>push</em> origin tech103branch</div>
                                 <div id="12" class="code-comment">// Push commits to remote branch</div>
                             </div>
 
