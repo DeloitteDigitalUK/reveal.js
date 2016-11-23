@@ -69,29 +69,37 @@
         </section>
 
         <section>
-          <h2>React in a Nutshell</h2>
-          <ul>
-            <li>Breaks pages into components</li>
-            <li>All data kept in Props and State</li>
-            <li>Just describe your page (Declarative)</li>
-            <li>Data flows down from parents to children</li>
-          </ul>
+          <h2>Why React?</h2>
+          <p><a href="https://www.google.co.uk/#q=why+use+react" target="_blank">Lots of reasons</a>. Evidenced by Stack Overflow's <a href="http://stackoverflow.com/research/developer-survey-2016#technology" target="_blank">2016 developer survey</a>.</p>
+          <img width="500" height="259" data-src="images/trending.png" class="plain" alt="StackOverflow 2016 Developer Survey" />
+          <p>Easy to build fast, interactive apps without learning a huge set of new commands.</p>
+        </section>
+
+        <section>
+          <h2>Let's Start Building</h2>
         </section>
 
         <section>
           <h2>Break Pages into Components</h2>
           <img width="800" height="394" data-src="images/components.jpg" class="plain" alt="An example of breaking down Netflix into components." />
-          <p>Each component is responsible for one thing. Components can have child components, to move functionality out into its own.</p>
+          <p>Each component is responsible for one thing. A component can have child components which each do a specific task.</p>
+        </section>
+
+        <section>
+          <p>We'll make the video and play button.</p>
+          <img width="358" height="206" data-src="images/finished-component.jpg" class="plain" alt="What we're building." />
+          <p><a href="https://jsbin.com/hesizo/edit?js,output" target="_blank">See it running on JSBin.</a></p>
+        </section>
+
+        <section>
+          <h2>How to make a component?</h2>
+          <p>Every component has a <strong>render</strong> method, which describes how it looks.</p>
+          <p><a href="https://facebook.github.io/react/docs/jsx-in-depth.html" target="_blank">JSX</a> makes it easy to write render methods because it feels like writing HTML.</p>
+          <pre><code class="javascript">&lt;button type="button"&gt;Play&lt;/button&gt;</code></pre>
         </section>
 
         <section>
           <pre><code class="javascript">
-class PlayButton extends React.Component {
-  render() {
-    return &lt;button type="button"&gt;Play&lt;/button&gt;;
-  }
-}
-
 class VideoPlayer extends React.Component {
   render() {
     return (
@@ -102,7 +110,26 @@ class VideoPlayer extends React.Component {
     );
   }
 }
+
+class PlayButton extends React.Component {
+  render() {
+    return &lt;button type="button"&gt;Play&lt;/button&gt;;
+  }
+}
           </code></pre>
+        </section>
+
+        <section>
+          <h2>Data</h2>
+          <p>
+            How do I tell the button if it's a "Play" or "Pause" button?
+          </p>
+        </section>
+
+        <section>
+          <h2>1-way Data Flow in React</h2>
+          <img width="500" height="315" data-src="images/data-flow.png" class="plain" alt="1 way data flow in React." />
+          <p>Data flows from parents to children.</p>
         </section>
 
         <section>
@@ -112,14 +139,7 @@ class VideoPlayer extends React.Component {
         </section>
 
         <section>
-          <pre><code class="javascript">
-class PlayButton extends React.Component {
-  render() {
-    console.log(this.props.isPlaying);
-  }
-}
-
-class VideoPlayer extends React.Component {
+          <pre><code class="javascript">class VideoPlayer extends React.Component {
   constructor() {
     this.state = { isPlaying: false };
   }
@@ -130,22 +150,30 @@ class VideoPlayer extends React.Component {
     ...
   }
 }
+
+class PlayButton extends React.Component {
+  render() {
+    console.log(this.props.isPlaying);
+  }
+}
           </code></pre>
         </section>
 
         <section>
           <h2>Just Describe your Page</h2>
-          <p>When your data is xyz, how should it look? And when it is abc, how should it look?</p>
-          <p>You don't worry about changing from xyz to abc. React handles that for you. Simple!</p>
+          <p>If <em>isPlaying</em> is true, write "Pause". If false, write "Play."</p>
+          <p>Don't worry about what it was before. React handles that for you. Simple!</p>
         </section>
 
         <section>
           <pre><code class="javascript">
 class PlayButton extends React.Component {
   render() {
-    return &lt;button type="button"&gt;
-      {this.props.isPlaying ? 'Pause' : 'Play'}
-    &lt;/button&gt;;
+    return (
+      &lt;button&gt;
+        {this.props.isPlaying ? 'Pause' : 'Play'}
+      &lt;/button&gt;
+    );
   }
 }
           </code></pre>
@@ -156,20 +184,15 @@ class PlayButton extends React.Component {
         </section>
 
         <section>
-          <h2>2-way Data Binding in Angular</h2>
-          <img width="400" height="290" data-src="images/angular-binding.png" class="plain" alt="2 way data binding in Angular." />
-        </section>
-
-        <section>
-          <h2>1-way Data Flow in React</h2>
-          <img width="500" height="315" data-src="images/one-way-data-flow.png" class="plain" alt="1 way data flow in React." />
-          <p>Data flows from parents to children.</p>
+          <h2>Callbacks</h2>
+          <img width="500" height="315" data-src="images/callbacks.png" class="plain" alt="Callbacks in React." />
+          <p>Parents give the children a function to call when they need to pass something back up the tree.</p>
         </section>
 
         <section>
           <pre><code class="javascript">
 class VideoPlayer extends React.Component {
-
+  // The function to "give" to the child.
   togglePlaying() {
     this.setState({
       isPlaying: !this.state.isPlaying
@@ -191,34 +214,61 @@ class VideoPlayer extends React.Component {
           <pre><code class="javascript">
 class PlayButton extends React.Component {
   render() {
-    return &lt;button type="button"
-          onClick={this.props.onClick}&gt;
-          {this.props.isPlaying ? 'Pause' : 'Play'}
-      &lt;/button&gt;;
+    return (
+      &lt;button onClick={this.props.onClick}&gt;
+        {this.props.isPlaying ? 'Pause' : 'Play'}
+      &lt;/button&gt;
+    );
   }
 }
           </code></pre>
         </section>
 
         <section>
-          <h2>Getting Started</h2>
-          <p>JSBin is the ideal playground.</p>
+          <h2>What Next?</h2>
+          <p>Carry on editing our app in JSBin. It's the ideal playground.</p>
           <p><a href="https://jsbin.com/hesizo/edit?js,output" target="_blank">Here's the app we've built so far.</a></p>
         </section>
 
         <section>
-          <h2>What Next?</h2>
-          <p>React only draws components (the V in MVC), you pick the rest. Some ideas and tutorials:</p>
+          <h2>React in a Nutshell</h2>
           <ul>
-            <li><a href="https://css-tricks.com/gulp-for-beginners/" target="_blank">Gulp</a> - A task runner to compile your app.</li>
-            <li><a href="https://facebook.github.io/jest/docs/tutorial-react.html" target="_blank">Jest</a> - Unit testing for React.</li>
+            <li>Break pages into components.</li>
+            <li>Data flows down from parents to children.</li>
+            <li>All data kept in Props and State.</li>
+            <li>Just describe your page ("declarative").</li>
+          </ul>
+        </section>
+
+        <section>
+          <h2>Getting Started</h2>
+          <p>React only draws components, you pick the rest.</p>
+          <p>Use a starter kit to skip that. Learn one piece at a time.</p>
+
+          <ul>
+            <li><a href="https://github.com/DeloitteDigitalUK/react-redux-starter-app" target="_blank">Deloitte's Starter App</a> - Examples of AJAX calls, routing etc.</li>
+            <li><a href="https://github.com/facebookincubator/create-react-app" target="_blanl">Create React App</a> - Official command line tool to set up a new app. Great docs!</li>
+          </ul>
+        </section>
+
+        <section>
+          <h2>What Next?</h2>
+          <p>
+            Ready to learn what those other pieces are?
+          </p>
+          <ul>
             <li><a href="https://github.com/reactjs/react-router/blob/master/docs/Introduction.md" target="_blank">React Router</a> - Routing (to build single page apps).</li>
-            <li><a href="https://egghead.io/series/getting-started-with-redux" target="_blank">Redux</a> - Manage your data.</li>
+            <li><a href="https://egghead.io/series/getting-started-with-redux" target="_blank">Redux</a> - Manage data better.</li>
+            <li><a href="https://facebook.github.io/jest/docs/tutorial-react.html" target="_blank">Jest</a> - Unit testing for React.</li>
+            <li><a href="https://webpack.github.io/docs/tutorials/getting-started/" target="_blank">Webpack</a> - Bundle files your way.</li>
           </ul>
         </section>
 
         <section>
           <img width="600" height="279" data-src="../../lib/images/dd-logo.png" class="plain" alt="Deloitte Digital" />
+          <p>
+            (PS - We're <a href="https://uk.deloittedigital.com/careers/belfast/ddbuild/front-end-developer" target="_blank" title="Come build apps with us.">hiring web developers</a>)
+          </p>
         </section>
 
       </div>
