@@ -1,0 +1,448 @@
+<!doctype html>
+<html lang="en">
+
+	<head>
+		<meta charset="utf-8">
+
+		<title>Why JavaScript? - By Michael Martin</title>
+
+		<meta name="description" content="Why learn JavaScript? Isn't it just for websites?">
+		<meta name="author" content="Michael Martin">
+
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+
+		<link rel="stylesheet" href="../../css/reveal.css">
+		<link rel="stylesheet" href="../../css/theme/deloittedigital.css" id="theme">
+
+		<!-- Code syntax highlighting -->
+		<link rel="stylesheet" href="../../lib/css/monokai.css">
+
+		<link rel="shortcut icon" type="image/x-icon" href="../../lib/images/favicon.ico" />
+
+		<!-- Printing and PDF exports -->
+		<script>
+			var link = document.createElement( 'link' );
+			link.rel = 'stylesheet';
+			link.type = 'text/css';
+			link.href = window.location.search.match( /print-pdf/gi ) ? '../../css/print/pdf.css' : '../../css/print/paper.css';
+			document.getElementsByTagName( 'head' )[0].appendChild( link );
+		</script>
+
+		<!--[if lt IE 9]>
+		<script src="../../lib/js/html5shiv.js"></script>
+		<![endif]-->
+	</head>
+
+	<body>
+
+		<div class="reveal">
+
+			<!-- Any section element inside of this container is displayed as a slide -->
+			<div class="slides">
+				<section>
+          <img width="400" height="400" data-src="images/javascript.png" class="plain" alt="JavaScript logo" />
+          <h2>Why JavaScript?</h2>
+          <p>
+            <small>by Michael Martin (<a href="https://twitter.com/problogdesign">@problogdesign</a>) from <a href="https://eu.deloittedigital.com/en/home">Deloitte Digital</a></small>
+          </p>
+				</section>
+
+				<section>
+					<h2>Common Pre-conceptions</h2>
+				</section>
+
+        <section>
+          <p>
+            "JavaScript developer" == "Web developer";
+          </p>
+        </section>
+
+        <section>
+          <blockquote>&quot;The biggest mistake we made as a company was betting too much on HTML5.&quot;</blockquote>
+          <h3>Mark Zuckerberg, 2012...</h3>
+        </section>
+
+        <section>
+          <h2>JavaScript in 2016</h2>
+        </section>
+
+        <section>
+          <h3>StackOverflow</h3>
+          <blockquote>&quot;JavaScript is the most commonly used programming language on earth. Even Back-End developers are more likely to use it than any other language.&quot;</blockquote>
+          <p>StackOverflow <a href="http://stackoverflow.com/research/developer-survey-2016#work" target="_blank">2016 Developer Survey</a></p>
+        </section>
+
+        <section>
+          <img width="500" height="304" data-src="images/stackoverflow.png" class="plain" alt="StackOverflow" />
+          <p>
+            Most popular in 2016, 2015 and 2014.
+          </p>
+        </section>
+
+        <section>
+          <h3>Github</h3>
+          <img width="250" height="330" data-src="images/github-repos.jpg" class="plain" alt="Github" />
+          <p>
+            <a href="http://githut.info/" target="_blank">Most active repos</a>, most commits, most forks...
+          </p>
+        </section>
+
+        <section>
+          <h3>Job Listings</h3>
+          <img width="500" height="474" data-src="images/indeed.png" class="plain" alt="Job popularity" />
+          <p>
+            <a href="http://www.codingdojo.com/blog/9-most-in-demand-programming-languages-of-2016/" target="_blank">Indeed.com</a> and <a href="http://www.itjobswatch.co.uk/default.aspx?page=1&sortby=5&orderby=0&q=&id=900&lid=2618" target="_blank">IT Jobs Watch</a>
+          </p>
+        </section>
+
+        <section>
+          <h2>Why is it getting so popular?</h2>
+        </section>
+
+        <section>
+          <h3>Terse Code</h3>
+          <p>
+            Lets read in a file.
+          </p>
+        </section>
+
+        <section>
+          <pre><code class="java">
+BufferedReader br = new BufferedReader(new FileReader("file.txt"));
+try {
+    StringBuilder sb = new StringBuilder();
+    String line = br.readLine();
+
+    while (line != null) {
+        sb.append(line);
+        sb.append(System.lineSeparator());
+        line = br.readLine();
+    }
+    String everything = sb.toString();
+} finally {
+    br.close();
+}
+          </code></pre>
+          <p>
+            Java (<a href="http://stackoverflow.com/questions/4716503/reading-a-plain-text-file-in-java">StackOverflow</a> top answer)
+          </p>
+        </section>
+
+        <section>
+          <pre><code class="javascript">
+var fs = require('fs');
+fs.readFile('file.txt', 'utf8', function(err, data) {
+  if (err) throw err;
+  console.log(data)
+});
+          </code></pre>
+          <p>
+            JavaScript (<a href="http://stackoverflow.com/questions/9168737/read-a-text-file-using-node-js">StackOverflow</a> top answer)
+          </p>
+        </section>
+
+        <section>
+          <h3>Simple but Flexible</h3>
+          <p>
+            JSON = <strong>JavaScript</strong> Object Notation
+          </p>
+        </section>
+
+        <section>
+          <h3>Get Started Fast</h3>
+          <pre><code class="javascript">
+var express = require('express')
+var app = express()
+
+app.get('/', function (req, res) {
+  res.send('Hello World!')
+})
+
+app.listen(3000, function () {
+  console.log('Example app listening on port 3000!')
+})
+          </code></pre>
+
+          <p>
+            Web server <a href="https://expressjs.com/en/starter/hello-world.html" target="_blank">in Express</a>.
+          </p>
+        </section>
+
+        <section>
+          <h3>ES6</h3>
+          <ul>
+            <li>
+              Standardised Classes, inheritance etc
+            </li>
+            <li>
+              Generators (Annotations!)
+            </li>
+            <li>
+              Block scope
+            </li>
+            <li>
+              Promises
+            </li>
+            <li>
+              Maps and constants
+            </li>
+            <li>
+              Tonnes of one-liner tricks!
+            </li>
+          </ul>
+        </section>
+
+        <section>
+          <h3>Async/Await</h3>
+          <pre><code class="javascript">
+async function getFirstUser() {
+    let users = await getUsers();
+    return users[0].name;
+}
+          </code></pre>
+        </section>
+
+        <section>
+          <h3>Strong Types</h3>
+          <pre><code class="javascript">
+interface Person {
+  name: string;
+
+  age?: number; // Optionals
+
+  sayHello(name: string): void; // Functions
+}
+          </code></pre>
+          <p>
+            TypeScript and Flowtype
+          </p>
+        </section>
+
+        <section>
+          <h3>Functional Programming</h3>
+          <pre><code class="javascript">
+var numbers = [1, 2, 3, 4, 5];
+var isOdd = function(number) {
+  return number % 2;
+};
+var oddNumbers = numbers.filter(isOdd);
+          </code></pre>
+          <p>
+            Functions are <strong>first class citizens</strong> so we can do list comprehensions, currying, monads etc.
+          </p>
+        </section>
+
+        <section>
+          <img width="500" height="134" data-src="images/Immutable_js.png" class="plain" alt="Immutable.js" />
+          <pre><code class="javascript">
+var map1 = Immutable.Map({a:1, b:2, c:3});
+var map2 = map1.set('b', 50);
+map1.get('b'); // 2
+map2.get('b'); // 50
+          </code></pre>
+        </section>
+
+        <section>
+          <h2>Tooling</h2>
+        </section>
+
+        <section>
+          <img width="400" height="277" data-src="images/babel-1.png" class="plain" alt="Babel" />
+          <p>
+            Lets you use upcoming JavaScript features in all browsers, today.
+          </p>
+        </section>
+
+        <section>
+          <img width="651" height="228" data-src="images/react-perf-chrome-timeline.png" class="plain" alt="Profiling" />
+          <p>
+            Chrome DevTools for breakpoints, performance monitoring, network usage, device emulation, live editing etc.
+          </p>
+        </section>
+
+        <section>
+          <img width="700" height="481" data-src="images/webstorm.jpg" class="plain" alt="WebStorm" />
+          <p>
+            Webstorm, if you have IDE withdrawal symptoms. <a href="http://atom.io/" target="_blank">Atom</a> is still better ;)
+          </p>
+        </section>
+
+        <section>
+          <img width="500" height="176" data-src="images/eslint.jpg" class="plain" alt="ESLint" />
+          <p>
+            ESLint for intelligent code quality (Like Sonar)
+          </p>
+        </section>
+
+        <section>
+          <img width="500" height="194" data-src="images/npm.png" class="plain" alt="npm" />
+          <p>
+            Node and NPM. Millions of packages, installed into the project folder. Simple `npm install`
+          </p>
+        </section>
+
+        <section>
+          <img width="500" height="250" data-src="images/yarn.jpg" class="plain" alt="Yarn" />
+          <p>
+            npm replacement built by Facebook. Solves the npm version dependency problems, and its faster.
+          </p>
+        </section>
+
+        <section>
+          <h2>So What Can You Build?</h2>
+        </section>
+
+        <section>
+          <h3>Slideshows 😄</h3>
+          <p>
+            Digital-branded slideshow repo <a href="https://github.com/DeloitteDigitalUK/reveal.js">on Github</a>.
+          </p>
+        </section>
+
+        <section>
+          <h3>Testing</h3>
+          <img width="660" height="380" data-src="images/nightwatch.png" class="plain" alt="Nightwatch" />
+        </section>
+
+        <section>
+          <h3>Progressive Web Apps</h3>
+          <img width="660" height="348" data-src="images/planes.jpg" class="plain" alt="Paper Planes" />
+          <p>
+            Load <a href="https://paperplanes.world/">https://paperplanes.world/</a> on your phone! (<a href="https://pwa.rocks/">Other examples here</a>)
+          </p>
+        </section>
+
+        <section>
+          <h3>Serverless Architectures</h3>
+          <img width="600" height="175" data-src="images/serverless.jpg" class="plain" alt="Serverless" />
+          <p>
+            Because even microservices are too big... 😎
+          </p>
+        </section>
+
+        <section>
+          <h2>More Fun Stuff!</h2>
+        </section>
+
+        <section>
+          <h3>Electron</h3>
+          <img width="400" height="400" data-src="images/electron.png" class="plain" alt="Electron" />
+          <p>
+            Desktop apps built entirely with web technologies.
+          </p>
+        </section>
+
+        <section>
+          <h3>Examples</h3>
+          <img width="500" height="143" data-src="images/slack.jpg" class="plain" alt="Slack" />
+          <p>
+            Plus Atom and Hyperterm = Most of my day :D
+          </p>
+        </section>
+
+        <section>
+          <h3>Native Mobile Apps</h3>
+          <img width="600" height="370" data-src="images/react-native.jpg" class="plain" alt="React Native" />
+          <p>
+            React Native, Ionic.
+          </p>
+        </section>
+
+        <section>
+          <h3>Examples</h3>
+          <img width="600" height="403" data-src="images/native-apps.jpg" class="plain" alt="React Native apps" />
+        </section>
+
+        <section>
+          <h3>Games</h3>
+          <img width="600" height="502" data-src="images/command.jpg" class="plain" alt="Command and Conquer" />
+          <p>
+            e.g. <a href="https://www.adityaravishankar.com/projects/games/command-and-conquer/" target="_blank">Command and Conquer</a> entirely in the browser.
+          </p>
+        </section>
+
+        <section>
+          <h2>Insane Things</h2>
+        </section>
+
+        <section>
+          <h3>JS Code Shift</h3>
+          <p>
+            Maps your code to an abstract syntax tree, then compiles the tree back into high level code.
+          </p>
+          <p>
+            Can transform your whole codebase, e.g. move to ES6 features, implement classes, change testing library.
+          </p>
+          <p>
+            On <a href="https://github.com/facebook/jscodeshift" target="_blank">Github</a>
+          </p>
+        </section>
+
+        <section>
+          <h3>Web Assembly</h3>
+          <img width="600" height="349" data-src="images/WebAssembly.jpg" class="plain" alt="WASM" />
+          <p>
+            Extremely performant subset of JavaScript which all runtimes can optimise for.
+          </p>
+        </section>
+
+        <section>
+          <h3>WebGL</h3>
+          <img width="600" height="356" data-src="images/webgl.jpg" class="plain" alt="WebGL" />
+          <p>
+            <a href="https://www.chromeexperiments.com/webgl">WebGL</a> - Hardware-accelerated 3D graphics in the browser.
+          </p>
+        </section>
+
+        <section>
+          <h3>Atwood's Law</h3>
+          <blockquote>
+            any application that can be written in JavaScript, will eventually be written in JavaScript.
+          </blockquote>
+          <p>
+            Jeff Atwood (CodingHorror) in 2007. Now it's a Reddit, <a href="https://www.reddit.com/r/atwoodslaw/">/r/atwoodslaw</a>
+          </p>
+
+        </section>
+
+				<section>
+					<img width="600" height="279" data-src="../../lib/images/dd-logo.png" class="plain" alt="Deloitte Digital" />
+				</section>
+
+			</div>
+
+		</div>
+
+		<script src="../../lib/js/head.min.js"></script>
+		<script src="../../js/reveal.js"></script>
+
+		<script>
+
+			// Full list of configuration options available at:
+			// https://github.com/hakimel/reveal.js#configuration
+			Reveal.initialize({
+				controls: false,
+				progress: true,
+				history: true,
+				center: true,
+
+				transition: 'slide', // none/fade/slide/convex/concave/zoom
+
+				// Optional reveal.js plugins
+				dependencies: [
+					{ src: '../../lib/js/classList.js', condition: function() { return !document.body.classList; } },
+					{ src: '../../plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: '../../plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: '../../plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+					{ src: '../../plugin/zoom-js/zoom.js', async: true },
+					{ src: '../../plugin/notes/notes.js', async: true }
+				]
+			});
+
+		</script>
+
+	</body>
+</html>
